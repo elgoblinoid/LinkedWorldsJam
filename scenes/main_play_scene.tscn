@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://l83uko2h173l"]
+[gd_scene load_steps=26 format=3 uid="uid://l83uko2h173l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdwm3tye2kl" path="res://scenes/player.tscn" id="1_qtsyo"]
 [ext_resource type="Script" path="res://scenes/main_play_scene.gd" id="1_s5r4f"]
 [ext_resource type="Script" path="res://scripts/World.gd" id="2_eginj"]
 [ext_resource type="Texture2D" uid="uid://b72f60qvhs5je" path="res://sprites/Tiles.png" id="2_hgmqx"]
 [ext_resource type="Texture2D" uid="uid://cu7jl4a5rwd54" path="res://sprites/Gradient_Sky-Blue_01-1024x512.png" id="2_qtye0"]
+[ext_resource type="Script" path="res://scripts/Timer.gd" id="3_4bel0"]
 [ext_resource type="Texture2D" uid="uid://bbq07r6i2h726" path="res://sprites/Gradient_Sky-Foggy_01-1024x512.png" id="4_f464g"]
 [ext_resource type="Texture2D" uid="uid://sedxqjev5ch1" path="res://sprites/Gradient_Sky-Sunset_01-1024x512.png" id="5_3pv5e"]
 [ext_resource type="Texture2D" uid="uid://iw52n5b5hw3p" path="res://sprites/win_text.png" id="7_3cybx"]
@@ -3979,6 +3980,14 @@ StartText = NodePath("StartText")
 LoseText = NodePath("Player/LoseText")
 WinText = NodePath("Player/WinText")
 WinPortal = NodePath("World1/EndPortal/Area2D")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TimeLabel" type="Label" parent="HUD"]
+offset_right = 41.0
+offset_bottom = 26.0
+text = "wdsa"
+script = ExtResource("3_4bel0")
 
 [node name="Player" parent="." instance=ExtResource("1_qtsyo")]
 z_index = 1
