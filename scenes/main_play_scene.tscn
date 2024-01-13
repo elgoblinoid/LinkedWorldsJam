@@ -3966,6 +3966,7 @@ texture = ExtResource("4_f464g")
 
 [node name="Background3" type="Sprite2D" parent="Player/Backgrounds"]
 visible = false
+z_index = -100
 texture = ExtResource("5_3pv5e")
 
 [node name="World1" type="Node2D" parent="." node_paths=PackedStringArray("world_tiles")]

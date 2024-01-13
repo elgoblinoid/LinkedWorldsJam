@@ -149,7 +149,8 @@ idle_state = NodePath("../IdleState")
 player_sprite = NodePath("../../PlayerSprite")
 player = NodePath("../..")
 
-[node name="SwitchState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player_sprite", "player")]
+[node name="SwitchState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "player_sprite", "player")]
 script = ExtResource("8_pd28c")
+idle_state = NodePath("../IdleState")
 player_sprite = NodePath("../../PlayerSprite")
 player = NodePath("../..")

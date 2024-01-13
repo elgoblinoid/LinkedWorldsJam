@@ -11,7 +11,7 @@ extends Node2D
 @export var Background3 : Sprite2D
 @export var BlackBackground : ColorRect
 
-#0=no
+#0=no 1-4 stages
 var switching : int = 0
 
 # 3,1,2 back to front start
@@ -33,11 +33,19 @@ func _physics_process(delta):
 	player.physics_process(delta)
 	if player.check_to_switch() == 1:
 		switch_front()
+	elif player.check_to_switch() == 2:
+		switch_back()
 	if switching == 1:
 		raise_black_background()
 		lower_worlds()
 	if switching == 2:
 		raise_worlds()
+	if switching == 3:
+		lower_black_background()
+	if switching == 4:
+		BlackBackground.set_visible(false)
+		switching == 0
+		player.set_change_switch(0)
 
 func new_world_background():
 	#Set active to -100, others to -101
@@ -64,10 +72,27 @@ func switch_front():
 		new_world = 1
 	switching = 1
 	BlackBackground.set_visible(true)
+	
+func switch_back():
+	player.set_change_switch(3)
+	if current_world == 1:
+		new_world = 3
+	elif current_world == 2:
+		new_world = 1
+	else:
+		new_world = 2
+	switching = 1
+	BlackBackground.set_visible(true)
 
 func raise_black_background():
 	if BlackBackground.position.y > -200:
 		BlackBackground.position.y -= 15
+		
+func lower_black_background():
+	if BlackBackground.position.y < 200:
+		BlackBackground.position.y += 15
+	else:
+		switching = 4
 		
 func lower_worlds():
 	if World1.position.y < 300:
@@ -127,3 +152,27 @@ func raise_worlds():
 			World1.position.y -= 10
 	if World1.position.y < World1.max_height:
 		World1.position.y = World1.max_height
+	#world2
+	if World2.position.y > World2.max_height:
+		if current_world == 3:
+			World2.position.y -= 12
+		elif current_world == 1:
+			World2.position.y -= 8
+		else:
+			World2.position.y -= 10
+	if World2.position.y < World2.max_height:
+		World2.position.y = World2.max_height
+	#world3
+	if World3.position.y > World3.max_height:
+		if current_world == 1:
+			World3.position.y -= 12
+		elif current_world == 2:
+			World3.position.y -= 8
+		else:
+			World3.position.y -= 10
+	if World3.position.y < World3.max_height:
+		World3.position.y = World3.max_height
+	#final
+	if World1.position.y==World1.max_height and World2.position.y==World2.max_height and World3.position.y==World3.max_height:
+		new_world_background()
+		switching=3

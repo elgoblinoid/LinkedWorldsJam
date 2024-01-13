@@ -20,6 +20,9 @@ func physics_process(delta):
 		if Input.is_action_just_pressed("ui_down"):
 			next_state = switch_state
 			message = "switch_front"
+		elif Input.is_action_just_pressed("ui_up"):
+			next_state = switch_state
+			message = "switch_back"
 		
 	#Jump
 	if Input.is_action_just_pressed("ui_accept") and player.is_on_floor():
