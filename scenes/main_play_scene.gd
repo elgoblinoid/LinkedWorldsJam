@@ -10,9 +10,16 @@ extends Node2D
 @export var Background2 : Sprite2D
 @export var Background3 : Sprite2D
 @export var BlackBackground : ColorRect
+@export var StartText : Sprite2D
+@export var LoseText : Sprite2D
+@export var WinText : Sprite2D
+@export var WinPortal : Area2D
 
 #0=no 1-4 stages
 var switching : int = 0
+
+#0=start text, 1=live, 2=end
+var game_state : int = 0
 
 # 3,1,2 back to front start
 var current_world = 1
@@ -30,22 +37,44 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	player.physics_process(delta)
-	if player.check_to_switch() == 1:
-		switch_front()
-	elif player.check_to_switch() == 2:
-		switch_back()
-	if switching == 1:
-		raise_black_background()
-		lower_worlds()
-	if switching == 2:
-		raise_worlds()
-	if switching == 3:
-		lower_black_background()
-	if switching == 4:
-		BlackBackground.set_visible(false)
-		switching == 0
-		player.set_change_switch(0)
+	if game_state == 0:
+		if Input.is_action_just_pressed("jump"):
+			StartText.set_visible(false)
+			game_state = 1
+			#get_tree().reload_current_scene()
+	elif game_state == 1:
+		player.physics_process(delta)
+		if player.check_to_switch() == 1:
+			switch_front()
+		elif player.check_to_switch() == 2:
+			switch_back()
+		if switching == 1:
+			WinPortal.set_collision_mask_value(2,false)
+			raise_black_background()
+			lower_worlds()
+		if switching == 2:
+			raise_worlds()
+		if switching == 3:
+			lower_black_background()
+		if switching == 4:
+			BlackBackground.set_visible(false)
+			switching == 0
+			player.set_change_switch(0)
+			WinPortal.set_collision_mask_value(2,true)
+		#dead
+		if player.position.y > 200:
+			LoseText.set_visible(true)
+			game_state = 2
+			player.position.y = 200
+		elif WinPortal.won:
+			win()
+	elif game_state == 2:
+		if Input.is_action_just_pressed("jump"):
+			get_tree().reload_current_scene()
+			
+func win():
+	WinText.set_visible(true)
+	game_state = 2
 
 func new_world_background():
 	#Set active to -100, others to -101

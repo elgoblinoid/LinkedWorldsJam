@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://l83uko2h173l"]
+[gd_scene load_steps=22 format=3 uid="uid://l83uko2h173l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdwm3tye2kl" path="res://scenes/player.tscn" id="1_qtsyo"]
 [ext_resource type="Script" path="res://scenes/main_play_scene.gd" id="1_s5r4f"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bog6k6i7csqq7" path="res://sprites/start_text.png" id="8_74wlt"]
 [ext_resource type="Texture2D" uid="uid://dibkm60lvrc1v" path="res://sprites/lose_text.png" id="9_kshlg"]
 [ext_resource type="Texture2D" uid="uid://b22xhyjlw5kyd" path="res://sprites/portal.png" id="10_1hpjn"]
-[ext_resource type="Script" path="res://scenes/Area2D.gd" id="11_v34kl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_buh7j"]
 texture = ExtResource("2_hgmqx")
@@ -1351,7 +1350,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mnutw"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y160v"]
 radius = 9.0
 height = 26.0
 
@@ -3963,7 +3962,7 @@ physics_layer_0/collision_layer = 0
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_xeqi0")
 
-[node name="MainPlayScene" type="Node2D" node_paths=PackedStringArray("player", "World1", "World2", "World3", "Background1", "Background2", "Background3", "BlackBackground", "StartText", "LoseText", "WinText", "WinPortal")]
+[node name="MainPlayScene" type="Node2D" node_paths=PackedStringArray("player", "World1", "World2", "World3", "Background1", "Background2", "Background3", "BlackBackground", "StartText", "LoseText", "WinText")]
 script = ExtResource("1_s5r4f")
 player = NodePath("Player")
 World1 = NodePath("World1")
@@ -3976,7 +3975,6 @@ BlackBackground = NodePath("BlackBackground")
 StartText = NodePath("StartText")
 LoseText = NodePath("Player/LoseText")
 WinText = NodePath("Player/WinText")
-WinPortal = NodePath("World1/EndPortal/Area2D")
 
 [node name="Player" parent="." instance=ExtResource("1_qtsyo")]
 z_index = 1
@@ -4044,15 +4042,9 @@ sprite_frames = SubResource("SpriteFrames_p0lol")
 autoplay = "default"
 frame_progress = 0.189383
 
-[node name="Area2D" type="Area2D" parent="World1/EndPortal" node_paths=PackedStringArray("player")]
-collision_layer = 4
-collision_mask = 2
-script = ExtResource("11_v34kl")
-player = NodePath("../../../Player")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World1/EndPortal/Area2D"]
+[node name="EndPortalCB" type="CollisionShape2D" parent="World1/EndPortal"]
 position = Vector2(1, 0)
-shape = SubResource("CapsuleShape2D_mnutw")
+shape = SubResource("CapsuleShape2D_y160v")
 
 [node name="World2" type="Node2D" parent="." node_paths=PackedStringArray("world_tiles")]
 script = ExtResource("2_eginj")
@@ -4086,5 +4078,3 @@ color = Color(0, 0, 0, 1)
 z_index = 100
 position = Vector2(100, 50)
 texture = ExtResource("8_74wlt")
-
-[connection signal="body_entered" from="World1/EndPortal/Area2D" to="World1/EndPortal/Area2D" method="_on_body_entered"]

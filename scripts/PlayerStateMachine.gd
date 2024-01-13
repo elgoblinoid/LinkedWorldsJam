@@ -3,6 +3,8 @@ extends Node
 class_name PlayerStateMachine
 
 @export var current_state : State
+
+@export var switch_state : State
 #0=no, 1=front, 2=back
 var switch_state_now : int = 0
 
@@ -19,6 +21,7 @@ func physics_process(delta):
 		current_state = current_state.next_state
 		current_state.next_state = null
 		current_state.enter_state()
+
 
 func check_if_can_move():
 	return current_state.can_move

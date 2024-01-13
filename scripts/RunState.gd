@@ -10,7 +10,7 @@ func physics_process(delta):
 		next_state = jump_state
 		
 	#Run
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("left", "right")
 	if direction:
 		player.velocity.x = direction * player.SPEED
 		if direction > 0:
@@ -22,7 +22,7 @@ func physics_process(delta):
 		next_state = idle_state
 		
 	#Jump
-	if Input.is_action_just_pressed("ui_accept") and player.is_on_floor():
+	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		player.velocity.y = player.JUMP_VELOCITY
 		next_state = jump_state
 	

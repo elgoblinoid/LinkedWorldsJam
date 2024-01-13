@@ -110,6 +110,7 @@ size = Vector2(15, 23)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_r7tml")
 state_machine = NodePath("PlayerStateMachine")
 
@@ -123,9 +124,10 @@ frame_progress = 0.903227
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_j0yqw")
 
-[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "switch_state")]
 script = ExtResource("3_apk7d")
 current_state = NodePath("IdleState")
+switch_state = NodePath("SwitchState")
 
 [node name="IdleState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("run_state", "jump_state", "switch_state", "player_sprite", "player")]
 script = ExtResource("4_i7bcv")

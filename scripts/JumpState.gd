@@ -9,7 +9,7 @@ func physics_process(delta):
 		player.velocity.y += player.gravity * delta
 		
 	#Run
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("left", "right")
 	if direction:
 		player.velocity.x = (direction * player.SPEED)/2
 		if player.is_on_floor():
