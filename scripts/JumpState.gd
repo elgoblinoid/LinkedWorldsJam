@@ -23,3 +23,4 @@ func physics_process(delta):
 
 func enter_state():
 	player_sprite.play("jump")
+	$JumpNoise.play()

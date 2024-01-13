@@ -63,6 +63,7 @@ func _physics_process(delta):
 			WinPortal.set_collision_mask_value(2,true)
 		#dead
 		if player.position.y > 200:
+			$LoseSound.play()
 			LoseText.set_visible(true)
 			game_state = 2
 			player.position.y = 200
@@ -73,6 +74,7 @@ func _physics_process(delta):
 			get_tree().reload_current_scene()
 			
 func win():
+	$WinSound.play()
 	WinText.set_visible(true)
 	game_state = 2
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bsdwm3tye2kl"]
+[gd_scene load_steps=23 format=3 uid="uid://bsdwm3tye2kl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r7tml"]
 [ext_resource type="Texture2D" uid="uid://c7i3gsdiy4mjm" path="res://sprites/RobotCropped.png" id="2_b1cc2"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://scripts/RunState.gd" id="5_5ytnd"]
 [ext_resource type="Script" path="res://scripts/JumpState.gd" id="6_in8sp"]
 [ext_resource type="Script" path="res://scripts/SwitchState.gd" id="8_pd28c"]
+[ext_resource type="AudioStream" uid="uid://caykpojh8xg44" path="res://sounds/Menu_Sound_V2_SoG_HOVER.wav" id="8_pwnsm"]
+[ext_resource type="AudioStream" uid="uid://clba5logs5v7x" path="res://sounds/bug people 1.wav" id="9_5f4xj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_10ukp"]
 atlas = ExtResource("2_b1cc2")
@@ -151,8 +153,15 @@ idle_state = NodePath("../IdleState")
 player_sprite = NodePath("../../PlayerSprite")
 player = NodePath("../..")
 
+[node name="JumpNoise" type="AudioStreamPlayer" parent="PlayerStateMachine/JumpState"]
+stream = ExtResource("8_pwnsm")
+volume_db = 5.0
+
 [node name="SwitchState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "player_sprite", "player")]
 script = ExtResource("8_pd28c")
 idle_state = NodePath("../IdleState")
 player_sprite = NodePath("../../PlayerSprite")
 player = NodePath("../..")
+
+[node name="SwitchNoise" type="AudioStreamPlayer" parent="PlayerStateMachine/SwitchState"]
+stream = ExtResource("9_5f4xj")

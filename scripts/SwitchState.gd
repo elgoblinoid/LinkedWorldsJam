@@ -5,6 +5,7 @@ extends State
 func enter_state():
 	player_sprite.play("switch")
 	player.set_velocity(Vector2(0,0))
+	$SwitchNoise.play()
 
 func physics_process(delta):
 	if player.change_state_now == 3:

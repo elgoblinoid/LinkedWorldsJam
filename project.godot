@@ -15,6 +15,10 @@ run/main_scene="res://scenes/main_play_scene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://sprites/RobotTeleport.png"
 
+[autoload]
+
+BackgroundMusic="*res://scenes/audio_stream_player.tscn"
+
 [display]
 
 window/size/viewport_width=1280

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://l83uko2h173l"]
+[gd_scene load_steps=25 format=3 uid="uid://l83uko2h173l"]
 
 [ext_resource type="PackedScene" uid="uid://bsdwm3tye2kl" path="res://scenes/player.tscn" id="1_qtsyo"]
 [ext_resource type="Script" path="res://scenes/main_play_scene.gd" id="1_s5r4f"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dibkm60lvrc1v" path="res://sprites/lose_text.png" id="9_kshlg"]
 [ext_resource type="Texture2D" uid="uid://b22xhyjlw5kyd" path="res://sprites/portal.png" id="10_1hpjn"]
 [ext_resource type="Script" path="res://scenes/Area2D.gd" id="11_v34kl"]
+[ext_resource type="AudioStream" uid="uid://bjsx147wdihol" path="res://sounds/Menu_Sound_V2_SoG_LOCKED.wav" id="13_lk56x"]
+[ext_resource type="AudioStream" uid="uid://bn5rrrrd5w6ri" path="res://sounds/Menu_Sound_V2_SoG_UP_HAPPY.wav" id="14_26c7l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_buh7j"]
 texture = ExtResource("2_hgmqx")
@@ -3980,6 +3982,7 @@ WinPortal = NodePath("World1/EndPortal/Area2D")
 
 [node name="Player" parent="." instance=ExtResource("1_qtsyo")]
 z_index = 1
+position = Vector2(0, 4.5)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(100, 0)
@@ -4086,5 +4089,11 @@ color = Color(0, 0, 0, 1)
 z_index = 100
 position = Vector2(100, 50)
 texture = ExtResource("8_74wlt")
+
+[node name="LoseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_lk56x")
+
+[node name="WinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_26c7l")
 
 [connection signal="body_entered" from="World1/EndPortal/Area2D" to="World1/EndPortal/Area2D" method="_on_body_entered"]
