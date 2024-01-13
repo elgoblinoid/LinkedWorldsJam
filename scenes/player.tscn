@@ -1,7 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsdwm3tye2kl"]
+[gd_scene load_steps=21 format=3 uid="uid://bsdwm3tye2kl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r7tml"]
 [ext_resource type="Texture2D" uid="uid://c7i3gsdiy4mjm" path="res://sprites/RobotCropped.png" id="2_b1cc2"]
+[ext_resource type="Texture2D" uid="uid://d2i1b6edajrtq" path="res://sprites/RobotTeleport.png" id="3_5qs6v"]
+[ext_resource type="Script" path="res://scripts/PlayerStateMachine.gd" id="3_apk7d"]
+[ext_resource type="Script" path="res://scripts/IdleState.gd" id="4_i7bcv"]
+[ext_resource type="Script" path="res://scripts/RunState.gd" id="5_5ytnd"]
+[ext_resource type="Script" path="res://scripts/JumpState.gd" id="6_in8sp"]
+[ext_resource type="Script" path="res://scripts/SwitchState.gd" id="8_pd28c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_10ukp"]
 atlas = ExtResource("2_b1cc2")
@@ -89,22 +95,61 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5qs6v")
+}],
+"loop": true,
+"name": &"switch",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0yqw"]
 size = Vector2(15, 23)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
+collision_layer = 2
 script = ExtResource("1_r7tml")
+state_machine = NodePath("PlayerStateMachine")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5gjsh")
-animation = &"idle"
+animation = &"switch"
 autoplay = "idle"
-frame_progress = 0.243616
+frame_progress = 0.903227
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_j0yqw")
 
-[node name="PlayerStateMachine" type="Node" parent="."]
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("3_apk7d")
+current_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("run_state", "jump_state", "switch_state", "player_sprite", "player")]
+script = ExtResource("4_i7bcv")
+run_state = NodePath("../RunState")
+jump_state = NodePath("../JumpState")
+switch_state = NodePath("../SwitchState")
+player_sprite = NodePath("../../PlayerSprite")
+player = NodePath("../..")
+
+[node name="RunState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "player_sprite", "player")]
+script = ExtResource("5_5ytnd")
+idle_state = NodePath("../IdleState")
+jump_state = NodePath("../JumpState")
+player_sprite = NodePath("../../PlayerSprite")
+player = NodePath("../..")
+
+[node name="JumpState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("run_state", "idle_state", "player_sprite", "player")]
+script = ExtResource("6_in8sp")
+run_state = NodePath("../RunState")
+idle_state = NodePath("../IdleState")
+player_sprite = NodePath("../../PlayerSprite")
+player = NodePath("../..")
+
+[node name="SwitchState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player_sprite", "player")]
+script = ExtResource("8_pd28c")
+player_sprite = NodePath("../../PlayerSprite")
+player = NodePath("../..")
