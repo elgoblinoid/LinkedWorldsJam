@@ -14,6 +14,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+func remove_collision():
+	world_tiles.tile_set.set_physics_layer_collision_layer(0,0)
 
 func place_active():
 	max_height = 0

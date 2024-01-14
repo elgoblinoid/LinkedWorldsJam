@@ -14,6 +14,7 @@ extends Node2D
 @export var LoseText : Sprite2D
 @export var WinText : Sprite2D
 @export var WinPortal : Area2D
+@export var TimeLabel : Label
 
 #0=no 1-4 stages
 var switching : int = 0
@@ -49,6 +50,9 @@ func _physics_process(delta):
 		elif player.check_to_switch() == 2:
 			switch_back()
 		if switching == 1:
+			World1.remove_collision()
+			World2.remove_collision()
+			World3.remove_collision()
 			WinPortal.set_collision_mask_value(2,false)
 			raise_black_background()
 			lower_worlds()
@@ -60,7 +64,8 @@ func _physics_process(delta):
 			BlackBackground.set_visible(false)
 			switching == 0
 			player.set_change_switch(0)
-			WinPortal.set_collision_mask_value(2,true)
+			if current_world == 1:
+				WinPortal.set_collision_mask_value(2,true)
 		#dead
 		if player.position.y > 200:
 			$LoseSound.play()
@@ -69,7 +74,8 @@ func _physics_process(delta):
 			player.position.y = 200
 		elif WinPortal.won:
 			win()
-	elif game_state == 2:
+	if game_state == 2:
+		TimeLabel.stop_timer()
 		if Input.is_action_just_pressed("jump"):
 			get_tree().reload_current_scene()
 			

@@ -3966,7 +3966,7 @@ physics_layer_0/collision_layer = 0
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_xeqi0")
 
-[node name="MainPlayScene" type="Node2D" node_paths=PackedStringArray("player", "World1", "World2", "World3", "Background1", "Background2", "Background3", "BlackBackground", "StartText", "LoseText", "WinText", "WinPortal")]
+[node name="MainPlayScene" type="Node2D" node_paths=PackedStringArray("player", "World1", "World2", "World3", "Background1", "Background2", "Background3", "BlackBackground", "StartText", "LoseText", "WinText", "WinPortal", "TimeLabel")]
 script = ExtResource("1_s5r4f")
 player = NodePath("Player")
 World1 = NodePath("World1")
@@ -3980,6 +3980,7 @@ StartText = NodePath("StartText")
 LoseText = NodePath("Player/LoseText")
 WinText = NodePath("Player/WinText")
 WinPortal = NodePath("World1/EndPortal/Area2D")
+TimeLabel = NodePath("HUD/TimeLabel")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
