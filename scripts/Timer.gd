@@ -10,6 +10,12 @@ func _process(delta):
 		time += delta
 		self.set_text(str(int(time)))
 
+func white_text():
+	self.set_modulate(Color(1,1,1,1))
+	
+func black_text():
+	self.set_modulate(Color(0,0,0,1))
+
 func stop_timer():
 	stop = true
 	

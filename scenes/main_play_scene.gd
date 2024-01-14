@@ -123,6 +123,7 @@ func switch_back():
 	BlackBackground.set_visible(true)
 
 func raise_black_background():
+	TimeLabel.white_text()
 	if BlackBackground.position.y > -200:
 		BlackBackground.position.y -= 15
 		
@@ -214,3 +215,7 @@ func raise_worlds():
 	if World1.position.y==World1.max_height and World2.position.y==World2.max_height and World3.position.y==World3.max_height:
 		new_world_background()
 		switching=3
+		if current_world == 2:
+			TimeLabel.black_text()
+		else:
+			TimeLabel.white_text()
