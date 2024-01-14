@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Linked Worlds Jam"
+config/name="World Hopper"
 run/main_scene="res://scenes/main_play_scene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://sprites/RobotTeleport.png"
