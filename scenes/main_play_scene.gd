@@ -76,6 +76,7 @@ func _physics_process(delta):
 			win()
 	if game_state == 2:
 		TimeLabel.stop_timer()
+		BlackBackground.set_visible(false)
 		if Input.is_action_just_pressed("jump"):
 			get_tree().reload_current_scene()
 			
