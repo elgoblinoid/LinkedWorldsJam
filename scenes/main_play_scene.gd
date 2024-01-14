@@ -42,7 +42,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("jump"):
 			StartText.set_visible(false)
 			game_state = 1
-			#get_tree().reload_current_scene()
+			TimeLabel.start_timer()
 	elif game_state == 1:
 		player.physics_process(delta)
 		if player.check_to_switch() == 1:

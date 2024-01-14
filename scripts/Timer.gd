@@ -1,7 +1,7 @@
 extends Label
 
 var time = 0
-var stop : bool = false
+var stop : bool = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -12,3 +12,6 @@ func _process(delta):
 
 func stop_timer():
 	stop = true
+	
+func start_timer():
+	stop = false

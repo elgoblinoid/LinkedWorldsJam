@@ -3987,7 +3987,6 @@ TimeLabel = NodePath("HUD/TimeLabel")
 [node name="TimeLabel" type="Label" parent="HUD"]
 offset_right = 41.0
 offset_bottom = 26.0
-text = "wdsa"
 script = ExtResource("3_4bel0")
 
 [node name="Player" parent="." instance=ExtResource("1_qtsyo")]
